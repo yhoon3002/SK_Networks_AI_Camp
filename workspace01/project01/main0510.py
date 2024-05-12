@@ -218,4 +218,96 @@ if __name__ == "__main__":
         _list = 1, 2, 3, 4, 5
         print(list(filter(lambda x: x > 2, _list)))
 
-    lambda_with_filter()
+    ##############
+    ## 파일 열기1 ##
+    ##############
+    def file_io():
+        _filePath = "/Users/lim_younghoon/Desktop/SK_Networks_AI/workspace01/project01/2024-05-08.txt"
+
+        _openedFile = open(_filePath, encoding="utf-8")
+        _contents = _openedFile.read()
+        _contents2 = _openedFile.readline()
+
+        print(_contents)
+
+    ##############
+    ## 파일 열기2 ##
+    ##############
+    def file_io2():
+        _filePath = "/Users/lim_younghoon/Desktop/SK_Networks_AI/workspace01/project01/2024-05-08.txt"
+
+        with open(_filePath, encoding="utf-8", mode="a") as file:
+            file.write("추가됨추가됨추가됨추가됨추가됨추가됨추가됨추가됨")
+
+    ###################################
+    ## 랜덤하게 1000명의 키와 몸무게 만들기 ##
+    ###################################
+    def make_random_height_weight():
+        import random as rd
+
+        _korean = list("가나다라마바사아자차카타파하")
+
+        with open("info.txt", "w") as file:
+            for i in range(5):
+                _name = rd.choice(_korean) + rd.choice(_korean)
+                _weight = rd.randrange(40, 100)
+                _height = rd.randrange(140, 200)
+
+                file.write("{}, {}, {}\n".format(_name, _height, _weight))
+
+    ############################
+    ## 반복문으로 파일 한 줄씩 읽기 ##
+    ############################
+    def make_random_bmi():
+        with open("info.txt", "r") as file:
+            for line in file:
+                (_name, _weight, _height) = line.strip().split(", ")
+
+                if (not _name) or (not _weight) or (not _height):
+                    continue
+
+                _bmi = int(_weight) / ((int(_height) / 100) ** 2)
+                _result = ""
+                if 25 <= _bmi:
+                    _result = "과체중"
+                elif 18.5 <= _bmi:
+                    _result = "정상 체중"
+                else:
+                    _result = "저체중"
+
+                print(
+                    "\n".join(
+                        [
+                            "이름: {}",
+                            "몸무게: {}",
+                            "키: {}",
+                            "bmi: {}",
+                            "결과: {}",
+                        ]
+                    ).format(_name, _weight, _height, _bmi, _result)
+                )
+                print()
+
+    ##################
+    ## 제너레이터 함수 ##
+    ##################
+    def test():
+        print("호출되었습니다.")
+        yield "test"
+
+    ##########################
+    ## 딕셔너리 오름차순 정렬하기 ##
+    ##########################
+    def sort_dictionary():
+        _dictionaryInList = [
+            {"price": 1000},
+            {"price": 5000},
+            {"price": 3000},
+        ]
+
+        _dictionaryInList.sort(
+            key=lambda _dictionaryInList: _dictionaryInList["price"], reverse=False
+        )
+
+        for list in _dictionaryInList:
+            print(list)
